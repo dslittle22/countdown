@@ -1,0 +1,15 @@
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 5px solid rgba(0, 0, 0, 0.03);
+  border-radius: 3px;
+  font-size: 35px;
+  background-color: rgb(143, 143, 143);
+  color: rgb(245, 244, 242);
+  transition: all 300ms;
+}
+
+.box:hover {
+  transform: scale(1.05);
+}
