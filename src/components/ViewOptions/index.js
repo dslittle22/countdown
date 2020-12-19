@@ -2,21 +2,31 @@ import React from 'react';
 
 const ViewOptions = ({ handleOptionChange }) => {
   return (
-    <div>
-      <button name='day' onClick={handleOptionChange}>
-        Day
+    <div style={{ paddingBottom: '1rem' }}>
+      <button style={buttonStyle} name='day' onClick={handleOptionChange}>
+        Days
       </button>
-      <button name='week' onClick={handleOptionChange}>
-        Week
+      <button style={buttonStyle} name='week' onClick={handleOptionChange}>
+        Weeks
       </button>
-      <button name='month' onClick={handleOptionChange}>
-        Month
+      <button style={buttonStyle} name='month' onClick={handleOptionChange}>
+        Months
       </button>
-      <button name='year' onClick={handleOptionChange}>
-        Year
+      <button style={buttonStyle} name='year' onClick={handleOptionChange}>
+        Years
       </button>
     </div>
   );
+};
+
+const buttonStyle = {
+  border: '5px solid #555',
+  borderRadius: '2px',
+  background: 'white',
+  padding: '1rem 2rem',
+  margin: '0.5rem',
+  textDecoration: 'none',
+  fontSize: '1em',
 };
 
 export default ViewOptions;

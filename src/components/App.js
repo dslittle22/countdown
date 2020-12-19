@@ -1,30 +1,31 @@
 import React, { useState } from 'react';
 import './App.css';
 import Box from './Box';
+import CountdownDatePicker from './CountdownDatePicker';
 import ViewOptions from './ViewOptions';
-
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 
 const App = () => {
   const [option, setOption] = useState('day');
-  const [eventDate, setEventDate] = useState(new Date(2020, 12, 31));
-  const [eventTitle, setEventTitle] = useState("New Year's Eve");
+  const [eventDate, setEventDate] = useState(() => {
+    const today = new Date();
+    const year = today.getFullYear();
+    return new Date(year, 11, 31);
+  });
   const [remainingTime, setRemainingTime] = useState(() => {
     return Math.round((eventDate - new Date()) / (24 * 60 * 60 * 1000)) + 1;
   });
 
-  const capitalize = (s) => {
+  const capitalize = s => {
     if (typeof s !== 'string') return s;
     return s.charAt(0).toUpperCase() + s.slice(1);
   };
 
-  const handleNewEventUpdate = (newDate) => {
+  const handleNewEventUpdate = newDate => {
     setEventDate(newDate);
     setRemainingTime(calculateRemainingTime());
   };
 
-  const handleOptionChange = (e) => {
+  const handleOptionChange = e => {
     setOption(e.target.name);
     const newTime = calculateRemainingTime();
     setRemainingTime(newTime);
@@ -58,7 +59,7 @@ const App = () => {
     return (
       <div className='container'>
         {[...Array(numBoxes)].map((e, i) => {
-          return <Box key={i} />;
+          return <Box key={i} timeType={option} number={i + 1} />;
         })}
       </div>
     );
@@ -66,24 +67,22 @@ const App = () => {
 
   return (
     <div>
-      <h1>Countdown App</h1>
-      <p>
-        Event Title: <br />
-        <input
-          value={eventTitle}
-          onChange={(e) => setEventTitle(e.target.value)}
-        ></input>
-      </p>
-
-      <p>Event is on:</p>
-      <DatePicker
-        selected={eventDate}
-        onChange={handleNewEventUpdate}
-        fixedHeight
-        isClearable
-        placeholderText='Enter a Date'
-      />
-      <p>{formatRemainingTime()}</p>
+      <h1>Countdown</h1>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          paddingBottom: '1rem',
+        }}
+      >
+        Event is on:
+        <CountdownDatePicker
+          eventDate={eventDate}
+          handleNewEventUpdate={handleNewEventUpdate}
+        />
+      </div>
+      <div style={{ paddingBottom: '1rem' }}>{formatRemainingTime()}</div>
+      Vizualize remaining time in:
       <ViewOptions handleOptionChange={handleOptionChange} />
       <div className='container'>{renderBoxes()}</div>
     </div>

@@ -5,28 +5,27 @@ html {
 }
 
 body {
-  margin: 50px;
+  margin: 0 auto;
   line-height: 1.5;
   text-align: center;
   font-size: 2em;
   color: #555;
+  width: min(80%, 1000px);
 }
 
 *,
 *:before,
 *:after {
+  padding: 0;
+  margin: 0;
   box-sizing: inherit;
-}
-
-h2 {
-  margin-top: 1em;
-  padding-top: 1em;
 }
 
 h1,
 h2,
 strong {
   color: #333;
+  padding: 0.5em 0 0.5em;
 }
 
 input {
@@ -41,26 +40,5 @@ input {
   display: grid;
   grid-gap: 20px;
   justify-content: center;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-}
-
-.react-datepicker {
-  font-size: 1.3rem !important;
-}
-
-.react-datepicker__current-month {
-  font-size: 1.5rem !important;
-}
-
-.react-datepicker__header {
-  padding-top: 6px !important;
-}
-
-.react-datepicker__navigation {
-  top: 13px !important;
-}
-
-.react-datepicker__day-name,
-.react-datepicker__day {
-  margin: 0.5rem !important;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 }
