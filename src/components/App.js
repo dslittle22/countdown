@@ -11,9 +11,6 @@ const App = () => {
     const year = today.getFullYear();
     return new Date(year, 11, 31);
   });
-  const [remainingTime, setRemainingTime] = useState(() => {
-    return Math.round((eventDate - new Date()) / (24 * 60 * 60 * 1000)) + 1;
-  });
 
   const capitalize = s => {
     if (typeof s !== 'string') return s;
@@ -22,13 +19,10 @@ const App = () => {
 
   const handleNewEventUpdate = newDate => {
     setEventDate(newDate);
-    setRemainingTime(calculateRemainingTime());
   };
 
   const handleOptionChange = e => {
     setOption(e.target.name);
-    const newTime = calculateRemainingTime();
-    setRemainingTime(newTime);
   };
 
   const calculateRemainingTime = () => {
@@ -48,10 +42,6 @@ const App = () => {
       default:
         return totalDays;
     }
-  };
-
-  const formatRemainingTime = () => {
-    return `${capitalize(option)}s until event: ` + calculateRemainingTime();
   };
 
   const renderBoxes = () => {
@@ -81,7 +71,9 @@ const App = () => {
           handleNewEventUpdate={handleNewEventUpdate}
         />
       </div>
-      <div style={{ paddingBottom: '1rem' }}>{formatRemainingTime()}</div>
+      <div style={{ paddingBottom: '1rem' }}>
+        {`${capitalize(option)}s until event: ` + calculateRemainingTime()}
+      </div>
       Vizualize remaining time in:
       <ViewOptions handleOptionChange={handleOptionChange} />
       <div className='container'>{renderBoxes()}</div>
