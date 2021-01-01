@@ -58,8 +58,6 @@ const App: React.FC = () => {
         {`Time until event: ` + dateDiff(startDate, eventDate)}
       </div>
       Visualize remaining time in:
-      {/* <ViewOptions handleOptionChange={(e) => setOption(e.target.textContent)} /> */}
-      {/* <ViewOptions handleOptionChange={(e) => setOption(console.log('hi'))} /> */}
       {renderOptions()}
       {renderBoxes()}
     </div>
