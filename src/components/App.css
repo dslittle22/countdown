@@ -1,7 +1,7 @@
 html {
   box-sizing: border-box;
   font-family: 'Helvetica', 'Arial', sans-serif;
-  font-size: 12px;
+  font-size: 10px;
 }
 
 body {
@@ -18,7 +18,7 @@ body {
 *:after {
   padding: 0;
   margin: 0;
-  box-sizing: inherit;
+  box-sizing: border-box;
 }
 
 h1,
@@ -29,16 +29,39 @@ strong {
 }
 
 input {
-  width: 80%;
+  width: 60%;
   padding: 10px 10px;
   box-sizing: border-box;
   font-size: 1em;
   color: #555;
 }
 
-.container {
-  display: grid;
-  grid-gap: 20px;
-  justify-content: center;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+.react-datepicker {
+  font-size: 1.3rem !important;
+}
+
+.react-datepicker__current-month {
+  font-size: 1.5rem !important;
+}
+
+.react-datepicker__header {
+  padding-top: 6px !important;
+}
+
+.react-datepicker__navigation {
+  top: 13px !important;
+  transform: scale(1.5);
+}
+
+.react-datepicker__day-name,
+.react-datepicker__day {
+  margin: 0.5rem !important;
+}
+
+.react-datepicker__close-icon {
+  padding-right: 20px !important;
+}
+
+.react-datepicker__close-icon::after {
+  background-color: rgb(132, 132, 132) !important;
 }
