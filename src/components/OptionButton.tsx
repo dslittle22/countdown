@@ -4,20 +4,24 @@ import React from 'react'
 
 type Props = {
     handleOptionChange: (currentOption: optionType) => void
-    option: optionType
+    buttonOption: optionType,
+    selectedOption: optionType
 }
 
-const OptionButton: React.FC<Props> = ({handleOptionChange, option}) => {
+const OptionButton: React.FC<Props> = ({handleOptionChange, buttonOption, selectedOption}) => {
     return (
-        <StyledButton onClick={() => handleOptionChange(option)}>
-            {option.substring(0, 1).toLocaleUpperCase() + option.substring(1) + 's'}
+        <StyledButton onClick={() => handleOptionChange(buttonOption)} buttonOption={buttonOption} selectedOption={selectedOption}>
+            {buttonOption.substring(0, 1).toLocaleUpperCase() + buttonOption.substring(1) + 's'}
         </StyledButton>
     )
 }
 
 export default OptionButton
 
-
+type StyledButtonProps = {
+  buttonOption: optionType,
+  selectedOption: optionType
+}
 const StyledButton = styled.button`
   border: 5px solid #555;
   border-radius: 2px;
@@ -28,6 +32,8 @@ const StyledButton = styled.button`
   transition: color 200ms;
   display: grid;
   justify-content: center;
+  background: ${(p: StyledButtonProps )=> p.selectedOption === p.buttonOption? "#555" : 'white'};
+  color: ${(p: StyledButtonProps )=> p.selectedOption !== p.buttonOption? "#555" : 'white'};
 
   :hover {
     color: white;

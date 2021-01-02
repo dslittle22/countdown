@@ -3,8 +3,9 @@ import './App.css';
 import styled from 'styled-components';
 import Box from '../components/Box';
 import CountdownDatePicker from '../components/CountdownDatePicker';
-import { dateDiff, countBoxes } from '../utils/dates';
+import { formattedDateDiff, countBoxes } from '../utils/dates';
 import OptionButton from './OptionButton';
+import Footer from './Footer';
 
 export type optionType = 'day' | 'week' | 'month' | 'year';
 const App: React.FC = () => {
@@ -15,11 +16,11 @@ const App: React.FC = () => {
   const [startDate, setStartDate] = useState<Date>(new Date());
 
     const renderOptions = () => {
-      const allOptions = ['day', 'week', 'month', 'year']
+      const allOptions: optionType[] = ['day', 'week', 'month', 'year']
       return (
         <ButtonGrid>
-        {allOptions.map(option => (
-          <OptionButton option={option as optionType} handleOptionChange={(currentOption: optionType) => setOption(option as optionType)}/>
+        {allOptions.map(buttonOption => (
+          <OptionButton key={buttonOption} selectedOption={option} buttonOption={buttonOption} handleOptionChange={(option: optionType) => setOption(option)}/>
         ))}
         </ButtonGrid>
       )
@@ -27,7 +28,8 @@ const App: React.FC = () => {
 
   const renderBoxes = () => {
     const numBoxes = countBoxes(startDate, eventDate, option);
-    return (
+    return numBoxes === 0? (<div>None.</div>) : 
+      (
       <BoxGrid>
         {[...Array(numBoxes)].map((e, i) => {
           return <Box key={i} timeType={option} number={i + 1} />;
@@ -36,7 +38,8 @@ const App: React.FC = () => {
     );
   };
   return (
-    <div>
+    <>
+    <div className='main'>
       <h1>Countdown</h1>
       <DatePickerContainer>
         <FlexColumn>
@@ -55,12 +58,14 @@ const App: React.FC = () => {
         </FlexColumn>
       </DatePickerContainer>
       <div style={{ paddingBottom: '1rem' }}>
-        {`Time until event: ` + dateDiff(startDate, eventDate)}
+        {`Time until event: ` + formattedDateDiff(startDate, eventDate)}
       </div>
       Visualize remaining time in:
       {renderOptions()}
       {renderBoxes()}
     </div>
+    <Footer />
+    </>
   );
 };
 
@@ -84,9 +89,12 @@ const ButtonGrid = styled.div`
 const FlexColumn = styled.div`
   display: flex;
   flex-direction: column;
+  padding-bottom: 0.5rem;
 `;
 const DatePickerContainer = styled.div`
   display: flex;
+  max-width: 500px;
+  margin: 0 auto;
   justify-content: space-between;
   padding-bottom: 1rem;
   @media (max-width: 510px) {
