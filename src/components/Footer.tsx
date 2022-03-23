@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
       <div className='inner-container'>
       <p className='header-row'>Made by Danny Little in 2020.</p>
         <p className='header-row'>
-          <a href='https://github.com/dannylittle715'>
+          <a href='https://github.com/dslittle22'>
             Github
           </a>
           <a href='https://www.linkedin.com/in/danny-little-3b3665178/'>
